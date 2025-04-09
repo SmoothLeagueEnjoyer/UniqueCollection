@@ -20,13 +20,12 @@ const FilterSlice = createSlice({
         addStashes(state, action) {
             state.stashes = action.payload;
         },
-
     }
 });
 
 export const {
     addLeagues,
     addAccounts,
-    addStashes
+    addStashes,
 } = FilterSlice.actions;
 export default FilterSlice.reducer;

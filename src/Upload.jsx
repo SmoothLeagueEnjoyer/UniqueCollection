@@ -1,12 +1,13 @@
 import React, { useState} from "react";
-import {setHistory, setPeople} from "./GSHistorySlice";
-import {addLeagues, addAccounts, addStashes} from "./FilterSlice";
+import { setHistory, setPeople } from "./GSHistorySlice";
+import { addLeagues, addAccounts, addStashes } from "./FilterSlice";
 import {useDispatch} from "react-redux";
 import exampleUrl from '/example-logs.csv?url';
 
 export function UploadGSHistory({children}) {
     //const [bigLines, setBigLines] = useState([]);
     const dispatch = useDispatch();
+    const uniquesColumn = 6;
 
     const handleChange = e => {
         const fileReader = new FileReader();

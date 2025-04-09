@@ -12,6 +12,9 @@ export function StashHistoryTable() {
     //const currentLeague = "SGF Unique Collection League (PL53786)";
     const currentLeague = "SGF April Hardcore (PL53725)";
     const currentStash = "Unique";
+    const uniqueColumn = "item";
+    const leagueColumn = "league";
+    const stashColumn = "stash";
 
     const stashData = useSelector((state) => state.ghHistory.stashData);
     const peoples = useSelector((state) => state.ghHistory.people);
@@ -33,6 +36,18 @@ export function StashHistoryTable() {
     function getMySelection(a) {
         return <option value={a}>{a}</option>;
     }
+
+    const getRowsForUniques = (data) => {
+        const seen = new Set();
+        return data.toReversed().filter(row => {
+            if (row[stashColumn] !== currentStash) return false;
+            if (row[leagueColumn] !== currentLeague) return false;
+            const value = row[uniqueColumn];
+            if (seen.has(value)) return false;
+            seen.add(value);
+            return true;
+        }).toReversed();
+    };
 
 
     function actionSelect(e) {
@@ -81,7 +96,8 @@ export function StashHistoryTable() {
                     </thead>
                     <tbody>
                     {
-                        stashData.filter((item) => passesFilter(item)).map((line) =>
+                        getRowsForUniques(stashData).filter((item) => passesFilter(item)).map((line) =>
+                        //stashData.filter((item) => passesFilter(item)).map((line) =>
                             //  (line + " " + lineIndex)
                             getTableRow(line)
                         )
