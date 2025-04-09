@@ -1,0 +1,9 @@
+.tables{
+    display: flex;
+}
+.history{
+    float:left;
+}
+.people{
+    float: right;
+}
